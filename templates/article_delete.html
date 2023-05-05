@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Postni o'chirish{% endblock title %}
+
+{% block content %}
+    <div class="container-fluid" style="width: 50rem">
+        <h1>Postni o'chirish</h1>
+            <form action="" method="POST">{% csrf_token %}
+                <p>"{{ article.title }}" nomli postni o'chirishni istaysizmi?</p>
+                <button class="btn btn-danger" type="submit">O'chirish</button>
+                <a class="btn btn btn-outline-primary" href="{% url 'article_detail' article.pk %}" role="button">Orqaga qaytish</a>
+            </form>
+    </div>
+{% endblock content %}

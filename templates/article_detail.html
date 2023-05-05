@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Post{% endblock title %}
+
+{% block content %}
+    <div class="container-fluid" style="width: 50rem">
+        <div class="card">
+            <div class="card-body">
+                {%  if object.photo %}
+                <img class="card-img-top" src="{{ object.photo.url }}" alt="{{ object.title }}">
+                {% endif %}
+                <h1 class="card-title">{{ object.title }}</h1>
+                <h6 class="card-subtitle mb-2 text-muted">Muallif: {{ object.author | title }} | {{ object.date }}</h6>
+                <p class="card-text">{{ object.body | safe}}</p>
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="{% url 'article_edit' article.pk %}">Tahrirlash</a></li>
+                    <li class="page-item"><a class="page-link"  href="{% url 'article_delete' article.pk %}">O'chirish</a></li>
+                    <li class="page-item"><a class="page-link" href="{% url 'article_list' %}">Barcha postlar</a></li>
+                  </ul>
+                </nav>
+            </div>
+            <div class="card">
+                <div class="card-header">Izohlar</div>
+                {%  for comment in article.comments.all %}
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p>{{ comment }}</p>
+                            <footer class="blockquote-footer">{{ comment.author }}</footer>
+                        </blockquote>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
